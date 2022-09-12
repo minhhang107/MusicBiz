@@ -1,0 +1,70 @@
+﻿@model S2022A6MHN.Models.AlbumWithDetailViewModel
+
+@{
+    ViewBag.Title = "Album Details";
+    var userAccount = new S2022A6MHN.Controllers.RequestUser(User as System.Security.Claims.ClaimsPrincipal);
+}
+
+<h2>Album Details - @Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UrlAlbum)
+        </dt>
+
+        <dd>
+            <div style="height:150px; width:150px">
+                <img style="height:100%; object-fit:contain" src="@Html.DisplayFor(model => model.UrlAlbum)" />
+            </div>
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Genre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Background)
+        </dt>
+
+        <dd>
+            <div class="panel panel-default panel-body">
+                @Html.Raw(Model.Background)
+            </div>
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+
+    @if (userAccount.HasRoleClaim("Clerk"))
+    {
+        <span>| @Html.ActionLink("Add track to this album", "AddTrack", new { id = Model.Id })</span>
+    }
+</p>

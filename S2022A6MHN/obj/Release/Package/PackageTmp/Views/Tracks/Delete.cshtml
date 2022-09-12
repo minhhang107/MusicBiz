@@ -1,0 +1,59 @@
+﻿@model S2022A6MHN.Models.TrackWithDetailViewModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this track?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+            <hr/>
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AudioUrl)
+        </dt>
+
+        @if (Model.AudioUrl == "")
+        {
+            <dd>
+                Not available
+            </dd>
+        }
+        else
+        {
+            <dd>
+                <audio src="/clip/@Model.Id" controls="controls"></audio>
+                <hr />
+            </dd>
+        }
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Composers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Composers)
+            <hr/>
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
